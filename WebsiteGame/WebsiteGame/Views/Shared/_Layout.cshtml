@@ -19,28 +19,28 @@
         @Html.ActionLink("BoardGames", "Index", "BoardGames", new { productType = "BoardGame" }, new { @class = "item" })
         
         <div class="right menu">
-            <a class="item">Login</a>
-            @Html.ActionLink("SignUp", "Register", "Account", new { area= ""}, new { @class = "item" })
-            <div class="item">
-                    <div class="ui icon input">
-                    <input type="text" placeholder="Search...">
-                        <i class="search link icon"></i>
+                    @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "item"})
+                    @Html.ActionLink("SignUp", "Register", "Account", new { area = "" }, new { @class = "item"})
+                    <div class="item">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="Search...">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
-       <hr />
-        
-        
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Game Mania</p>
-        </footer>
-    </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="/javascript/icon.js"></script>
+
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Game Mania</p>
+                </footer>
+            </div>
+
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="/javascript/icon.js"></script>
 </body>
 </html>

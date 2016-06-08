@@ -43,6 +43,18 @@ namespace WebsiteGame.Controllers
             return View("Register");
         }
 
+        
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult SubmitLogin()
+        {
+            string username = Request.Form["Username"];
+            string password = Request.Form["password"];
+            return View("RegisterStep4");
+        }
      
     }
 }
