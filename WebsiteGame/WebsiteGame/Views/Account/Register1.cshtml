@@ -1,0 +1,111 @@
+﻿   @model WebsiteGame.Models.Account
+    @{
+        ViewBag.Title = "Register";
+       
+}
+
+<h2>Register</h2>
+<h4> Create a new account</h4>
+<hr />
+      @if (ViewBag.Message != null)
+      {
+         <div class="ui success message">
+             <div class="header">Registration is complete</div>
+             <p>Now you can log in with your new account</p>
+         </div>
+      }
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "ui form", role = "form" }))
+    {
+            <div class="required field">
+                <label for="Username">Username:</label>
+                <input type="text" name="Username" value="" />
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" value="" />
+                </div>
+                <div class="required field">
+                    <label for="ConfirmPassword">Confirm Password</label>
+                    <input type="password" name="ConfirmPassword" value="" />
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <label for="FirstName">First name:</label>
+                    <input type="text" name="Firstname" value="" />
+                </div>
+                <div class="required field">
+                    <label for="LastName">Last name:</label>
+                    <input type="text" name="LastName" />
+                </div>
+            </div>
+            <div class="required field">
+                <label for="DateOfBirth">Date of birth</label>
+                <input type="date" name="DateIfBirth" value="" />
+            </div>
+            <div class="field">
+                <label for="Gender"> Gender</label>
+                <select>
+                    <option value="">Gender</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <label for="Email">Email</label>
+                    <input type="email" name="Email" value="" />
+                </div>
+                <div class="required field">
+                    <label for="ConfirmEmail">ConfirmEmail</label>
+                    <input type="email" name="ConfirmEmail" value="" />
+                </div>
+            </div>
+            <div class="field">
+                <label for="GSM">GSM</label>
+                <input type="text" name="GSM" value="" />
+            </div>
+            <div class="two fields">
+                <div class="field">
+                    <label for="StreetName">Street name</label>
+                    <input type="text" name="StreetName" value="" />
+                </div>
+                <div class="field">
+                    <label for="Number">Number</label>
+                    <input type="text" name="Hnumber" value="" />
+                </div>
+            </div>
+            <div class="field">
+                <label for="City">City</label>
+                <input type="text" name="City" value="" />
+            </div>
+            <div class="field">
+                <label for="Zipcode">Zipcode</label>
+                <input type="text" name="Zipcode" value="" />
+            </div>
+            <div class="required field">
+                <label for="Country">Country</label>
+                <input type="text" name="Country" value="" />
+            </div>
+            <div class="field">
+                <label for="Customerscard">Customerscardnumber</label>
+                <input type="text" name="CustomerscardNumber" value="" />
+            </div>
+            <input type="submit" value="Submit" class="submit" />
+
+            <div>
+            </div>
+    }
+
+
+
+
+
+
+
+
+
+
+
