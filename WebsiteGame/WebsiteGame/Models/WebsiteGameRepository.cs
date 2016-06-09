@@ -15,7 +15,7 @@ namespace WebsiteGame.Models
         private string connectionstring = "User id = Sillaatjuh; Password = apw6zq-; Data source =127.0.0.1";
         List<Product> products;
        
-
+        //Get all products
         public List<Product> GetAllProducts()
         {
             products = new List<Product>();
@@ -53,7 +53,7 @@ namespace WebsiteGame.Models
             return products;
         }
 
-
+        //get products with a certain categorie
         public List<Product> GetProductCategorie(string ProductType)
         {
             products = new List<Product>();
@@ -91,6 +91,7 @@ namespace WebsiteGame.Models
             return products;
         }
 
+        //add an account
         public bool AddNewAccount(Account account)
         {
 
@@ -113,5 +114,42 @@ namespace WebsiteGame.Models
             }
             return true;
         }
+
+        //login
+        //public bool Login(string username, string password)
+        //{
+        //    try
+        //    {
+        //        var conn = new OracleConnection(connectionstring);
+
+        //        using (conn)
+        //        {
+        //            conn.Open();
+
+        //            var command = new OracleCommand("SELECT Username FROM Account WHERE username = '" + username + "' and Password ='"+ password +"'", conn);
+        //            command.CommandType = CommandType.Text;
+        //            using (var reader = command.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    var productID = reader["ID"].ToString();
+        //                    var productType = reader["ProductType"].ToString();
+        //                    var productName = reader["NAME"].ToString();
+        //                    var productDescription = reader["Description"].ToString();
+        //                    var productPrice = Convert.ToDecimal(reader["Price"]);
+
+        //                    Product p = new Product(productType, productName, productDescription, productPrice);
+        //                    products.Add(p);
+        //                }
+        //            }
+
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        throw new DatabaseConnectionException("Database Error");
+        //    }
+        //    return products;
+        //}
     }
 }

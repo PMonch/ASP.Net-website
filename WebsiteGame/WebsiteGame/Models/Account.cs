@@ -80,5 +80,10 @@ namespace WebsiteGame.Models
         {
             dal.AddNewAccount(account);
         }
+
+        //public bool Login(string username, string password)
+        //{
+        //    return dal.Login(username, password);
+        //}
     }
 }

@@ -31,5 +31,11 @@ namespace WebsiteGame.Models
         {
             return _repository.AddNewAccount(account);
         }
+
+        //login
+        //public bool Login(string username, string password)
+        //{
+        //    return _repository.Login(username, password);
+        //}
     }
 }

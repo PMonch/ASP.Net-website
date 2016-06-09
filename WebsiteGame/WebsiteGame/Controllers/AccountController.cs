@@ -53,7 +53,16 @@ namespace WebsiteGame.Controllers
         {
             string username = Request.Form["Username"];
             string password = Request.Form["password"];
-            return View("RegisterStep4");
+           //if( account.Login(username, password) == true)
+           // {
+           //     ViewBag.Message = "Logged in";
+           //     return View("index");
+           // }
+           // else
+           // {
+           //     ViewBag.Message = "Username or password is incorrect";
+           // }
+            return View();
         }
      
     }

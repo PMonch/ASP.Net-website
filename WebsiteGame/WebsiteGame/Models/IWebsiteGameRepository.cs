@@ -8,8 +8,14 @@ namespace WebsiteGame.Models
 {
     public interface IWebsiteGameRepository
     {
+        //Get all product or product from a certain categorie
         List<Product> GetAllProducts();
         List<Product> GetProductCategorie(string productType);
+
+        //add an account
         bool AddNewAccount(Account account);
+
+        //login
+        //bool login(string username, string password);
     }
 }
