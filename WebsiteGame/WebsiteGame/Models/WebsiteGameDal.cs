@@ -33,9 +33,9 @@ namespace WebsiteGame.Models
         }
 
         //login
-        //public bool Login(string username, string password)
-        //{
-        //    return _repository.Login(username, password);
-        //}
+        public bool Login(string username, string password)
+        {
+            return _repository.Login(username, password);
+        }
     }
 }

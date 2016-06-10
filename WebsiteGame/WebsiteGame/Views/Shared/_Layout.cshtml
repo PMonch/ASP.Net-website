@@ -19,8 +19,18 @@
         @Html.ActionLink("BoardGames", "Index", "BoardGames", new { productType = "BoardGame" }, new { @class = "item" })
         
         <div class="right menu">
-                    @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "item"})
-                    @Html.ActionLink("SignUp", "Register", "Account", new { area = "" }, new { @class = "item"})
+            @if (Session["Username"]== null)
+            {
+                @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "item" })
+                @Html.ActionLink("SignUp", "Register", "Account", new { area = "" }, new { @class = "item" })
+            }
+            else
+            {
+                var name = Session["Username"].ToString();
+                @Html.ActionLink(name, "Profile", "Account", new { area = "" }, new { @class = "item" })
+                @Html.ActionLink("Log Out", "LogOut", "Account", new { area = "" }, new { @class = "item" });
+               
+            }
                     <div class="item">
                         <div class="ui icon input">
                             <input type="text" placeholder="Search...">

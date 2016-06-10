@@ -47,6 +47,11 @@ namespace WebsiteGame.Models
 
         private WebsiteGameDal dal = new WebsiteGameDal(new WebsiteGameRepository());
 
+        public Account()
+        {
+
+        }
+
         public Account(string username, string password, string dateOfBirth, string email, string phoneNumber, string address, string zipcode, string city, UserType usertype)
         {
             this.Username = username;
@@ -60,11 +65,14 @@ namespace WebsiteGame.Models
             this.Type = usertype;
 
         }
-
-        public Account()
+        
+        public Account(string username, string password)
         {
-
+            this.Username = username;
+            this.Password = password;
         }
+
+  
 
         public bool ChangePersonaldata(string username, string password, DateTime dateOfBirth, string email, string phoneNumber, string address,string zipcode, string city)
         {
@@ -81,9 +89,9 @@ namespace WebsiteGame.Models
             dal.AddNewAccount(account);
         }
 
-        //public bool Login(string username, string password)
-        //{
-        //    return dal.Login(username, password);
-        //}
+        public bool Login(string username, string password)
+        {
+            return dal.Login(username, password);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace WebsiteGame.Controllers
 
         private Account account;
         private int accountID = 1;
+        
 
         [HttpGet]
         public ActionResult Register()
@@ -53,17 +54,36 @@ namespace WebsiteGame.Controllers
         {
             string username = Request.Form["Username"];
             string password = Request.Form["password"];
-           //if( account.Login(username, password) == true)
-           // {
-           //     ViewBag.Message = "Logged in";
-           //     return View("index");
-           // }
-           // else
-           // {
-           //     ViewBag.Message = "Username or password is incorrect";
-           // }
+            account = new Account(username, password);
+            if (account.Login(username, password) == true)
+            {
+                ViewBag.Message = "Logged in";
+                Session["Username"] = username;
+                
+            }
+            else
+            {
+                ViewBag.Message = "Username or password is incorrect";
+                return View("Login");
+            }
+            Store store = new Store("Markt 19", "5401CR", "Uden", "0413 256412");
+            ViewBag.MyList = store.GetAllProducts();
+            return View("../Home/Index");
+        }
+
+        public ActionResult LogOut()
+        {
+            Store store = new Store("Markt 19", "5401CR", "Uden", "0413 256412");
+            ViewBag.MyList = store.GetAllProducts();
+            Session["Username"] = null;
+            return View("../Home/Index");
+        }
+
+        public new ActionResult Profile()
+        {
             return View();
         }
-     
+
+
     }
 }

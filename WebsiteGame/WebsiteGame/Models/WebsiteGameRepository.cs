@@ -41,7 +41,9 @@ namespace WebsiteGame.Models
 
                             Product p = new Product(productType, productName, productDescription, productPrice);
                             products.Add(p);
+                            
                         }
+                        conn.Close();
                     }
 
                 }
@@ -79,7 +81,9 @@ namespace WebsiteGame.Models
 
                             Product p = new Product(productType, productName, productDescription, productPrice);
                             products.Add(p);
+                          
                         }
+                        conn.Close();
                     }
 
                 }
@@ -104,6 +108,7 @@ namespace WebsiteGame.Models
                     OracleCommand cmd = new OracleCommand("insert into Account values( accountID.NEXTVAL, '', '" + account.Username + "', '" + account.Password + "', '" + account.Gender + "', '" + account.Email + "','" + account.PhoneNumber + "','" + account.Address + "','" + account.Zipcode + "', '" + account.City + "')", connection);
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
                     
                 }
               
@@ -116,40 +121,40 @@ namespace WebsiteGame.Models
         }
 
         //login
-        //public bool Login(string username, string password)
-        //{
-        //    try
-        //    {
-        //        var conn = new OracleConnection(connectionstring);
+        public bool Login(string username, string password)
+        {
+            try
+            {
+                var conn = new OracleConnection(connectionstring);
 
-        //        using (conn)
-        //        {
-        //            conn.Open();
+                using (conn)
+                {
+                    conn.Open();
 
-        //            var command = new OracleCommand("SELECT Username FROM Account WHERE username = '" + username + "' and Password ='"+ password +"'", conn);
-        //            command.CommandType = CommandType.Text;
-        //            using (var reader = command.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    var productID = reader["ID"].ToString();
-        //                    var productType = reader["ProductType"].ToString();
-        //                    var productName = reader["NAME"].ToString();
-        //                    var productDescription = reader["Description"].ToString();
-        //                    var productPrice = Convert.ToDecimal(reader["Price"]);
+                    var command = new OracleCommand("SELECT Username, Password FROM Account WHERE username = '" + username + "'", conn);
+                    command.CommandType = CommandType.Text;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var Username = reader["Username"].ToString();
+                            var Password = reader["Password"].ToString();
+                            if(Username == username && Password==password)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    conn.Close();
 
-        //                    Product p = new Product(productType, productName, productDescription, productPrice);
-        //                    products.Add(p);
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        throw new DatabaseConnectionException("Database Error");
-        //    }
-        //    return products;
-        //}
+                }
+            }
+            catch
+            {
+                throw new DatabaseConnectionException("Database Error");
+               
+            }
+            return false;
+        }
     }
 }

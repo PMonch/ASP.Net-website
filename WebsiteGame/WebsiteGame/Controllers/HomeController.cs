@@ -13,14 +13,19 @@ namespace WebsiteGame.Controllers
         private Store store = new Store("Markt 19", "5401CR", "Uden", "0413 256412");
         private Product pr;
         private List<Product> related;
+       
         // GET: Home
         public ActionResult Index()
         {
-           
             ViewBag.MyList = store.GetAllProducts();
             return View();
         }
 
+        public ActionResult Home()
+        {
+            ViewBag.MyList = store.GetAllProducts();
+            return View("Index");
+        }
         public ActionResult ProductDetails(string name)
         {
             

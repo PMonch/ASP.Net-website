@@ -16,6 +16,6 @@ namespace WebsiteGame.Models
         bool AddNewAccount(Account account);
 
         //login
-        //bool login(string username, string password);
+        bool Login(string username, string password);
     }
 }
