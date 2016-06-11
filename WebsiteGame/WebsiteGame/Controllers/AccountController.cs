@@ -59,6 +59,7 @@ namespace WebsiteGame.Controllers
             {
                 ViewBag.Message = "Logged in";
                 Session["Username"] = username;
+                Session["Password"] = password;
                 
             }
             else
@@ -81,7 +82,19 @@ namespace WebsiteGame.Controllers
 
         public new ActionResult Profile()
         {
+            string username = Session["Username"].ToString();
+            string password = Session["Password"].ToString();
+            account = new Account(username, password);
+            Account CurrentAccount = account.GetAccount(username, password);
+            ViewBag.Account = CurrentAccount;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeProfile(Account account)
+        {
+            account.ChangePersonaldata(account.Username, account.Password, account.Gender, account.Customerscard, account.Email, account.PhoneNumber, account.Address, account.Zipcode, account.City, account.FirstName, account.LastName);
+            return RedirectToAction("Profile");
         }
 
 

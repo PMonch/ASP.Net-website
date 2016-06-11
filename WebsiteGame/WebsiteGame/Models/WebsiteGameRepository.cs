@@ -13,8 +13,9 @@ namespace WebsiteGame.Models
     public class WebsiteGameRepository : IWebsiteGameRepository
     {
         private string connectionstring = "User id = Sillaatjuh; Password = apw6zq-; Data source =127.0.0.1";
-        List<Product> products;
-       
+        private List<Product> products;
+        private Account account;
+
         //Get all products
         public List<Product> GetAllProducts()
         {
@@ -105,7 +106,7 @@ namespace WebsiteGame.Models
                 {
                   
                    
-                    OracleCommand cmd = new OracleCommand("insert into Account values( accountID.NEXTVAL, '', '" + account.Username + "', '" + account.Password + "', '" + account.Gender + "', '" + account.Email + "','" + account.PhoneNumber + "','" + account.Address + "','" + account.Zipcode + "', '" + account.City + "')", connection);
+                    OracleCommand cmd = new OracleCommand("insert into Account values( accountID.NEXTVAL, '', '" + account.Username + "', '" + account.Password + "', '" + account.Gender + "', '" + account.Email + "','" + account.PhoneNumber + "','" + account.Address + "','" + account.Zipcode + "', '" + account.City + "','"+account.FirstName+"','"+ account.LastName+"')", connection);
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
@@ -155,6 +156,77 @@ namespace WebsiteGame.Models
                
             }
             return false;
+        }
+
+        public Account GetAccount(string username, string password)
+        {
+            
+            try
+            {
+                var conn = new OracleConnection(connectionstring);
+
+                using (conn)
+                {
+                    conn.Open();
+
+                    var command = new OracleCommand("SELECT * FROM Account WHERE username = '" + username + "'", conn);
+                    command.CommandType = CommandType.Text;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var Username = reader["Username"].ToString();
+                            var Password = reader["Password"].ToString();
+                            var Customerscard = reader["CustomersCard_ID"].ToString();
+                            var Gender = reader["Gender"].ToString();
+                            var Email = reader["Email"].ToString();
+                            var PhoneNumber = reader["PhoneNumber"].ToString();
+                            var Address = reader["Address"].ToString();
+                            var Zipcode = reader["ZipCode"].ToString();
+                            var City = reader["City"].ToString();
+                            var Firstname = reader["FirstName"].ToString();
+                            var Lastname = reader["LastName"].ToString();
+                            if (Username == username && Password == password)
+                            {
+                                account = new Account(Username, password, Email, PhoneNumber, Address, Zipcode, City, Firstname, Lastname, Gender, Customerscard);
+                                
+                            }
+                        }
+                    }
+                    conn.Close();
+
+                }
+            }
+            catch
+            {
+                throw new DatabaseConnectionException("Database Error");
+
+            }
+            return account;
+        }
+
+        public bool ChangePersonaldata(string username, string password, string gender, string customerscard, string email, string phoneNumber, string address, string zipcode, string city, string firstname, string lastname)
+        {
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionstring))
+                {
+
+
+                    OracleCommand cmd = new OracleCommand("Update Account Set  CustomersCard_ID = '"+ customerscard+ "', Gender = '"+ gender+"',  Email ='" + email+"', PhoneNumber = '"+ phoneNumber+ "', Address='"+address+ "', ZipCode = '"+ zipcode+ "', City = '"+ city+ "', FirstName = '" + firstname+ "', LastName = '"+ lastname+"' WHERE Username = '"+ username+"'" , connection);
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+
+                }
+
+            }
+            catch
+            {
+                throw new DatabaseConnectionException("Database Error");
+            }
+            return true;
+          
         }
     }
 }

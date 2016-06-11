@@ -17,5 +17,12 @@ namespace WebsiteGame.Models
 
         //login
         bool Login(string username, string password);
+
+        //Get account
+        Account GetAccount(string username, string password);
+
+        //Change personal data
+        bool ChangePersonaldata(string username, string password, string gender, string customerscard, string email, string phoneNumber, string address, string zipcode, string city, string firstname, string lastname);
+       
     }
 }

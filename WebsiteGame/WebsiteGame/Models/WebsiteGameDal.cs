@@ -37,5 +37,18 @@ namespace WebsiteGame.Models
         {
             return _repository.Login(username, password);
         }
+
+        //Get account
+        public Account GetAccount(string username, string password)
+        {
+            return _repository.GetAccount(username, password);
+        }
+
+        //Change personal data
+        public bool ChangePersonaldata(string username, string password, string gender, string customerscard, string email, string phoneNumber, string address, string zipcode, string city, string firstname, string lastname)
+        {
+            return _repository.ChangePersonaldata(username, password, gender,customerscard, email, phoneNumber, address, zipcode, city, firstname, lastname);
+           
+        }
     }
 }

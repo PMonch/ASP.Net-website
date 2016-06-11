@@ -19,6 +19,9 @@ namespace WebsiteGame.Models
 
         public Customerscard Card { get; set; }
 
+        [MinLength(13, ErrorMessage ="Customerscard doesn't have the right length")]
+        public string Customerscard { get; set; }
+
         [Required]
         public string Username { get; set; }
 
@@ -30,10 +33,7 @@ namespace WebsiteGame.Models
 
         [Required]
         public string Password { get; set; }
-
-        [Required]
-        public string DateOfBirth { get; set; }
-
+        
         [Required(ErrorMessage ="Gender is niet correct")]
         public string Gender { get; set; }
 
@@ -52,17 +52,20 @@ namespace WebsiteGame.Models
 
         }
 
-        public Account(string username, string password, string dateOfBirth, string email, string phoneNumber, string address, string zipcode, string city, UserType usertype)
+        public Account(string username, string password, string email, string phoneNumber, string address, string zipcode, string city, string firstname, string lastname, string gender, string customerscard)
         {
             this.Username = username;
             this.Password = password;
-            this.DateOfBirth = dateOfBirth;
             this.Email = email;
             this.PhoneNumber = phoneNumber;
             this.Address = address;
             this.Zipcode = zipcode;
             this.City = city;
-            this.Type = usertype;
+            this.FirstName = firstname;
+            this.LastName = lastname;
+            this.Gender = gender;
+            this.Customerscard = customerscard;
+            
 
         }
         
@@ -74,9 +77,10 @@ namespace WebsiteGame.Models
 
   
 
-        public bool ChangePersonaldata(string username, string password, DateTime dateOfBirth, string email, string phoneNumber, string address,string zipcode, string city)
+        public bool ChangePersonaldata(string username, string password, string gender, string customerscard, string email, string phoneNumber, string address,string zipcode, string city, string firstname, string lastname)
         {
-            return false;
+            return dal.ChangePersonaldata(username, password, gender, customerscard, email, phoneNumber, address, zipcode, city, firstname, lastname);
+           
         }
 
         public bool AddCustomersCard(int cardnumber)
@@ -92,6 +96,10 @@ namespace WebsiteGame.Models
         public bool Login(string username, string password)
         {
             return dal.Login(username, password);
+        }
+        public Account GetAccount(string username, string password)
+        {
+            return dal.GetAccount(username, password);
         }
     }
 }
